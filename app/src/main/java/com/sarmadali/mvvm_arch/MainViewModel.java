@@ -10,4 +10,9 @@ public class MainViewModel extends ViewModel {
     public void increment(){
         count++;
     }
+
+    //decrement method
+    public void decrement(){
+        count--;
+    }
 }

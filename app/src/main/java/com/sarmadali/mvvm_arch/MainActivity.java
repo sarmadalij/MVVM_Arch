@@ -1,18 +1,18 @@
 package com.sarmadali.mvvm_arch;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
 
     MainViewModel viewModel;
     TextView textView;
-    Button button;
+    Button addition;
+    Button subtraction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +21,13 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         textView = findViewById(R.id.textView);
         setText();
-        button = findViewById(R.id.button);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                increase(textView);
-            }
-        });
+        addition = findViewById(R.id.sum);
+        subtraction = findViewById(R.id.subtract);
+
+        addition.setOnClickListener(v -> increase());
+
+        subtraction.setOnClickListener(v -> decrease());
 
     }
 
@@ -37,9 +36,15 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(String.valueOf(viewModel.count));
     }
 
-    //for button onclick
-    private void increase(View v){
+    //for button addition onclick
+    private void increase(){
         viewModel.increment();
+        setText();
+    }
+
+    //for button addition onclick
+    private void decrease(){
+        viewModel.decrement();
         setText();
     }
 }
